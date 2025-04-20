@@ -10,7 +10,12 @@ const commentRoutes = require('./routes/commentRoutes');
 const app = express();
 
 // Middleware
-app.use(cors());
+
+app.use(cors({
+    origin: '*', // ในช่วง dev อนุญาตทั้งหมดก่อน (ตอน production จะต้องล็อกต้นทาง)
+    credentials: true
+  }));
+  
 app.use(express.json());
 
 // Routes
