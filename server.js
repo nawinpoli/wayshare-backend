@@ -10,11 +10,22 @@ const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
-// CORS
+const allowedOrigins = [
+  'http://localhost:3000', 
+  'https://wayshare-frontend.vercel.app'
+];
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://wayshare-frontend.onrender.com'], // ใส่ front-end url ที่จะอนุญาต
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
+
 
 // Parse JSON
 app.use(express.json());
