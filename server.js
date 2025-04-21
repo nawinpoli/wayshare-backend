@@ -10,13 +10,17 @@ const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
+// ✅ อนุญาต Origin
 const allowedOrigins = [
   'http://localhost:3000', 
-  'https://wayshare-frontend.vercel.app'
+  'https://wayshare-frontend.vercel.app',
+  'https://wayshare-frontend-git-main-nawinpolis-projects.vercel.app' // (ถ้า deploy preview บ่อย)
 ];
 
+// ✅ Setup CORS
 app.use(cors({
   origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, Postman)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -26,10 +30,8 @@ app.use(cors({
   credentials: true
 }));
 
-
-// Parse JSON
+// ✅ ต้องวาง cors() ก่อน express.json()
 app.use(express.json());
-
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
