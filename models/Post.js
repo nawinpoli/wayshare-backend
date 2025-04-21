@@ -19,6 +19,10 @@ const PostSchema = new mongoose.Schema({
     score: Number,
     text: String,
     reviewsCount: Number
+  },
+  // ✅ เพิ่มตรงนี้
+  moreInfo: {
+    type: String,
   }
 });
 
