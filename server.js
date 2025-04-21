@@ -10,13 +10,13 @@ const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
-// Middleware
-
+// CORS
 app.use(cors({
-    origin: '*', // ในช่วง dev อนุญาตทั้งหมดก่อน (ตอน production จะต้องล็อกต้นทาง)
-    credentials: true
-  }));
-  
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
+// Parse JSON
 app.use(express.json());
 
 // Routes
@@ -27,9 +27,9 @@ app.use('/api/comments', commentRoutes);
 
 // Connect MongoDB
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch(err => console.error('❌ MongoDB error:', err));
 
-// Start server
+// Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
