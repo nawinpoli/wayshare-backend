@@ -68,3 +68,13 @@ exports.deleteComment = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.deleteAllComments = async (req, res) => {
+  try {
+    await Comment.deleteMany({});
+    res.status(200).json({ message: "ลบคอมเมนต์ทั้งหมดเรียบร้อยแล้ว" });
+  } catch (error) {
+    console.error("Error deleting comments:", error.message);
+    res.status(500).json({ message: "เกิดข้อผิดพลาดในการลบคอมเมนต์ทั้งหมด" });
+  }
+};

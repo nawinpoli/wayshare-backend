@@ -10,6 +10,16 @@ exports.getPostById = async (req, res) => {
   res.json(post);
 };
 
+exports.deleteAllPosts = async (req, res) => {
+  try {
+    await Post.deleteMany({});
+    res.status(200).json({ message: "ลบโพสต์ทั้งหมดเรียบร้อยแล้ว" });
+  } catch (error) {
+    console.error("Error deleting posts:", error.message);
+    res.status(500).json({ message: "เกิดข้อผิดพลาดในการลบโพสต์ทั้งหมด" });
+  }
+};
+
 exports.createPost = async (req, res) => {
   const post = new Post(req.body);
   await post.save();
