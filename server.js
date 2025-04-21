@@ -12,7 +12,7 @@ const app = express();
 
 // CORS
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://wayshare-frontend.onrender.com'], // ใส่ front-end url ที่จะอนุญาต
   credentials: true
 }));
 
